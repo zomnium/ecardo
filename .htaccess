@@ -100,7 +100,16 @@ AddType	text/vtt				vtt
 # More proxies cache assets if there is no query string
 # ----------------------------------------------------------------------
 <IfModule mod_rewrite.c>
-	RewriteEngine On
+    
+    # Silex
+    Options -MultiViews
+
+    RewriteEngine On
+
+    # Silex
+    #RewriteBase /path/to/app
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [QSA,L]
 
 	# Setting up an environment variable so your code can detect if mod_rewrite rules are executable
 	# in this folder and you can use file.123.jpg or you need to fall back to file.jpg?123
