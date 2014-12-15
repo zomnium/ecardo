@@ -18,6 +18,7 @@ class App
     public $silex;
     public $config;
     public $ecards;
+    public $mail;
 
     /**
      * Bootstrap
@@ -33,8 +34,17 @@ class App
         // Set configuration
         $this->setConfiguration($config);
 
-        // Register framework
+        // Register framework and service providers
         $this->silex = new SilexApplication($this->config['framework']);
+        $this->silex->register(new \Silex\Provider\SwiftmailerServiceProvider());
+        $this->silex->register(new \Silex\Provider\FormServiceProvider());
+        $this->silex->register(new \Silex\Provider\ValidatorServiceProvider());
+        $this->silex->register(new \Silex\Provider\TranslationServiceProvider(), array(
+            'translator.domains' => array(),
+        ));
+
+        // Set mail configuration
+        $this->app->silex['swiftmailer.options'] = $this->config['mail'];
 
         // Index ecards
         $this->indexEcards($this->config['content']);
@@ -66,10 +76,19 @@ class App
     private function defaultConfiguration()
     {
         return array(
-            'framework' => array(
-                'debug' => false,
-                ),
-            );
+            'path.base'     => __DIR__,
+            'path.content'  => __DIR__.'/content',
+            'content'       => array(),
+            'framework'     => array(
+                'debug'     => false,
+            ),
+            'mail'          => array(
+                'host'      => '127.0.0.1',
+                'port'      => '25',
+                'username'  => '',
+                'password'  => '',
+            ),
+        );
     }
 
     /**

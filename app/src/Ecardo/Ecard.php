@@ -28,13 +28,6 @@ abstract class Ecard
 		// Get singleton instance of the application
 		$this->app = Application::getInstance();
 
-		// Register service providers
-		$this->app->silex->register(new \Silex\Provider\FormServiceProvider());
-		$this->app->silex->register(new \Silex\Provider\ValidatorServiceProvider());
-		$this->app->silex->register(new \Silex\Provider\TranslationServiceProvider(), array(
-		    'translator.domains' => array(),
-		));
-
 		// Register route and Twig service provider
 		$this->app->silex->match('/'.$name, $controller)
 			 ->before(array($this, 'registerTwigServiceProvider'));
