@@ -17,6 +17,12 @@ abstract class Ecard
 {
 	protected $app;
 
+	/**
+	 * Constructor
+	 * @param string $name 
+	 * @param string $controller
+	 */
+
 	public function __construct($name, $controller)
 	{
 		// Get singleton instance of the application
@@ -29,13 +35,20 @@ abstract class Ecard
 		    'translator.domains' => array(),
 		));
 
-		// Register route and twig service provider
+		// Register route and Twig service provider
 		$this->app->silex->match('/'.$name, $controller)
 			 ->before(array($this, 'registerTwigServiceProvider'));
 	}
 
+	/**
+	 * Register Twig Service Provider
+	 *
+	 * @param request $request Current request from the HTTP Foundation
+	 */
+
 	public function registerTwigServiceProvider(Request $request)
 	{
+		// Load Twig service provider and set default path
 		$this->app->silex->register(new \Silex\Provider\TwigServiceProvider(), array(
 			'twig.path' => $this->app->config['path.content'].$request->getPathInfo(),
 		));

@@ -21,6 +21,8 @@ class App
 
     /**
      * Bootstrap
+     *
+     * @param array $config Application configuration
      */
 
     public function __construct(Array $config)
@@ -37,6 +39,9 @@ class App
         // Index ecards
         $this->indexEcards($this->config['content']);
 
+        // Error pages
+        // $this->silex->error(array($this, 'errorPage'));
+
         // Run application
         $this->silex->run();
     }
@@ -44,7 +49,7 @@ class App
     /**
      * Get singleton instance of this class
      *
-     * @return object instance
+     * @return object Singleton of this instance
      */
 
     public static function getInstance()
@@ -54,6 +59,8 @@ class App
 
     /**
      * Default Configuration
+     *
+     * @return array
      */
 
     private function defaultConfiguration()
@@ -67,6 +74,9 @@ class App
 
     /**
      * Set Configuration
+     * 
+     * @param array $config Application configuration to overwrite defaults
+     * @return array
      */
 
     private function setConfiguration(Array $config)
@@ -77,6 +87,8 @@ class App
 
     /**
      * Index Ecards
+     *
+     * @param array $ecards Ecards with machinename as key and class as value
      */
 
     private function indexEcards($ecards)
@@ -91,6 +103,10 @@ class App
 
     /**
      * Load Ecard
+     * 
+     * @param string $name Machinename of the ecard
+     * @param string $class Class of the ecard
+     * @return object on succes or else boolean false
      */
 
     private function loadEcard($name, $class)
@@ -112,4 +128,11 @@ class App
         // Load ecard
         return $this->ecards[$name] = new $class;
    }
+
+   /**
+    * Error Page
+    * TODO: implement this
+    */
+
+   public function errorPage() {}
 }
