@@ -44,7 +44,7 @@ class App
         ));
 
         // Set mail configuration
-        $this->app->silex['swiftmailer.options'] = $this->config['mail'];
+        $this->silex['swiftmailer.options'] = $this->config['mail'];
 
         // Index ecards
         $this->indexEcards($this->config['content']);
