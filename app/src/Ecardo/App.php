@@ -101,7 +101,7 @@ class App
     private function setConfiguration(Array $config)
     {
         // Merge default configuration with input
-        return $this->config = array_replace_recursive($config, $this->defaultConfiguration());
+        return $this->config = array_replace_recursive($this->defaultConfiguration(), $config);
     }
 
     /**
