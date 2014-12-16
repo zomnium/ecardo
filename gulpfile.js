@@ -4,13 +4,19 @@
  */
 
 var path         = {
-        app:    'app',
+        app:    'content',
+        dev:    'tmp',
         build:  'min'
     },
     app = {
         styles:     path.app + '/styles',
         scripts:    path.app + '/scripts',
         images:     path.app + '/images'
+    },
+    dev = {
+        styles:     path.dev + '/styles',
+        scripts:    path.dev + '/scripts',
+        images:     path.dev + '/images'
     },
     build = {
         styles:     path.build + '/styles',
@@ -64,7 +70,7 @@ gulp.task('scripts-minify', function() {
 gulp.task('stylus', function () {
     gulp.src(app.styles + '/main.styl')
         .pipe(stylus({use: [jeet()]}))
-        .pipe(gulp.dest(build.styles));
+        .pipe(gulp.dest(dev.styles));
 });
 
 /** Styles All **/
