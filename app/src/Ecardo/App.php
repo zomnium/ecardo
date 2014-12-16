@@ -76,8 +76,8 @@ class App
     private function defaultConfiguration()
     {
         return array(
-            'path.base'     => __DIR__,
-            'path.content'  => __DIR__.'/content',
+            'path.base'     => '',
+            'path.content'  => 'content',
             'content'       => array(),
             'framework'     => array(
                 'debug'     => false,
@@ -101,7 +101,7 @@ class App
     private function setConfiguration(Array $config)
     {
         // Merge default configuration with input
-        return $this->config = array_merge_recursive($config, $this->defaultConfiguration());
+        return $this->config = array_replace_recursive($config, $this->defaultConfiguration());
     }
 
     /**
