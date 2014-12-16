@@ -76,6 +76,9 @@ class App
     private function defaultConfiguration()
     {
         return array(
+            'theme'         => array(
+                'debug'     => false,
+            ),
             'path.base'     => '',
             'path.content'  => 'content',
             'content'       => array(),
