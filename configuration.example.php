@@ -13,6 +13,7 @@ $config = array(
 
     'path.base'             => __DIR__,
     'path.content'          => __DIR__.'/content',
+    'path.ecards'           => __DIR__.'/content/ecards',
 
     // Content
 

@@ -43,7 +43,7 @@ abstract class Ecard
 	{
 		// Load Twig service provider and set default path
 		$this->app->silex->register(new \Silex\Provider\TwigServiceProvider(), array(
-			'twig.path' => $this->app->config['path.content'].$request->getPathInfo(),
+			'twig.path' => $this->app->config['path.ecards'].$request->getPathInfo(),
 		));
 	}
 }

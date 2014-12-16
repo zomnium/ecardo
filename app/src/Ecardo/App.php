@@ -131,7 +131,7 @@ class App
     private function loadEcard($name, $class)
     {
         // Generate filepath
-        $filepath = $this->config['path.content'].'/'.$name.'/ecard.php';
+        $filepath = $this->config['path.ecards'].'/'.$name.'/ecard.php';
 
         // File does not exist, quit
         if (! file_exists($filepath))
