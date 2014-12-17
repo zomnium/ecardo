@@ -6,7 +6,7 @@
 var path         = {
         app:    'content',
         dev:    'tmp',
-        build:  'min'
+        build:  'content/min'
     },
     app = {
         styles:     path.app + '/styles',
