@@ -50,7 +50,7 @@ class App
         $this->indexEcards($this->config['content']);
 
         // Error pages
-        // $this->silex->error(array($this, 'errorPage'));
+        $this->silex->error(array($this, 'errorPage'));
 
         // Run application
         $this->silex->run();
@@ -156,5 +156,24 @@ class App
     * TODO: implement this
     */
 
-   public function errorPage() {}
+    public function errorPage(\Exception $e, $errorCode)
+    {
+        // Load Twig service provider and set default path
+        $this->silex->register(new \Silex\Provider\TwigServiceProvider(), array(
+            'twig.path' => $this->config['path.base'].'/app/views',
+        ));
+
+        // Check for not found errors
+        switch ($errorCode)
+        {
+            case 404:
+                $page = '404';
+                break;
+            default:
+                $page = 'default';
+        }
+
+        // Return error page
+        return $this->silex['twig']->render('/error-'.$page.'.twig');
+    }
 }
