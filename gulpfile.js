@@ -94,8 +94,12 @@ gulp.task('stylus-nib', function () {
 gulp.task('stylus-compress', function () {
     gulp.src(app.styles + '/main.styl')
         .pipe(stylus({
-            use: nib(),
+            use: [jeet(), nib()],
             compress: true
+        }))
+        .pipe(autoprefix({
+            browsers: ['last 2 versions'],
+            cascade: false
         }))
         .pipe(gulp.dest(build.styles));
 });
@@ -129,9 +133,9 @@ gulp.task('serve', function() {
 
 /** Build **/
 
-gulp.task('build', function() {
-    console.log('nope...');
-});
+gulp.task('build', [
+    'stylus-compress'
+]);
 
 /** Default **/
 
